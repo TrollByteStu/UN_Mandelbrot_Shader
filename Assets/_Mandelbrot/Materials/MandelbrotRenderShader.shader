@@ -5,6 +5,7 @@ Shader "Mandelbrot/MandelbrotRenderShader"
         _MainTex ("Texture", 2D) = "white" {}
         _Area ("Area", vector) = (0,0,4,4)
         _Angle ("Angle", range(-3.1415,3.1415)) = 0 
+        _MaxIter ("MaxIter",float) = 255
     }
     SubShader
     {
@@ -40,7 +41,7 @@ Shader "Mandelbrot/MandelbrotRenderShader"
             }
 
             float4 _Area;
-            float _Angle;
+            float _Angle, _MaxIter;
             sampler2D _MainTex;
 
             float2 rot(float2 p ,float2 pivot,float a)
@@ -63,11 +64,14 @@ Shader "Mandelbrot/MandelbrotRenderShader"
                 c = rot(c,_Area.xy,_Angle);
                 float2 z;
                 float iter;
-                for (iter = 0; iter < 255; iter++) {
+                for (iter = 0; iter < _MaxIter; iter++) {
                     z = float2(z.x*z.x-z.y*z.y, 2*z.x*z.y)+c;
                     if (length(z)>2) break;
                 }
-                return iter/255;
+                float m = sqrt(iter/_MaxIter);
+                float4 col = sin(float4(.3f,.45,.5,1) * m * 20) / 2 + .5;
+                col = tex2D(_MainTex,float2(m,.5));
+                return col ;
             }
             ENDCG
         }
