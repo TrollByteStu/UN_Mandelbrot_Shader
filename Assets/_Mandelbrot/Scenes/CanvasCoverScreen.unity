@@ -618,6 +618,7 @@ GameObject:
   - component: {fileID: 1322911900}
   - component: {fileID: 1322911902}
   - component: {fileID: 1322911901}
+  - component: {fileID: 1322911903}
   m_Layer: 5
   m_Name: ImagetoShowTextureOn
   m_TagString: Untagged
@@ -679,6 +680,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1322911899}
   m_CullTransparentMesh: 1
+--- !u!114 &1322911903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322911899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4485aa95a8a894f9336c7bdd3a7036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mat: {fileID: 2100000, guid: 4750660067f22924ea7ad345c1f5e21a, type: 2}
+  pos: {x: 0, y: 0}
+  scale: 4
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

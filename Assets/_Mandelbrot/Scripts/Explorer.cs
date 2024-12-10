@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Explorer : MonoBehaviour
@@ -5,17 +6,22 @@ public class Explorer : MonoBehaviour
     public Material mat;
     public Vector2 pos;
     public float scale;
+
+    Vector2 smoothpos;
+    float smoothscale;
     void UpdateShader()
     {
+        smoothpos = Vector2.Lerp(smoothpos, pos, .1f);
+        smoothscale = math.lerp(smoothscale, scale, .1f);
         float aspect = (float)Screen.width / (float)Screen.height;
-        float scalex = scale;
-        float scaley = scale;
+        float scalex = smoothscale;
+        float scaley = smoothscale;
 
         if (aspect > 1f)
             scaley /= aspect;
         else
             scalex *= aspect;
-        mat.SetVector("_Area", new Vector4(pos.x,pos.y,scalex,scaley));
+        mat.SetVector("_Area", new Vector4(smoothpos.x, smoothpos.y,scalex,scaley));
 
     }
     void HandleInputs()
